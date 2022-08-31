@@ -4,9 +4,6 @@
   "private": true,
   "description": "convert book highlights from different places to one json format.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "book",
     "highlights",
