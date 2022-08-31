@@ -2,7 +2,7 @@
 
 Homepage :point_right: https://highlights2json.benbinbin.com
 
- This project aim to convert book highlights from various sources to the same JSON format for more easily reuse by developers.
+This project aims to convert book highlights from various sources to the same JSON format for more easily reuse by developers.
 
 :sparkles: All your data just retain on your browser (it will not be send to backend server, because this tool just run based on the frontend), so feel free to use it.
 
@@ -36,7 +36,7 @@ The output JSON file will contains some properties as follow:
   "metadata": {
     "isbn": "number",
     "title": "string",
-    "date": "Date", // publish date
+    "date": "string", // publish date of the book
     "authors": "[string]",
     "translators": "[string]",
     "press": "string",
@@ -57,7 +57,7 @@ The output JSON file will contains some properties as follow:
     "location": "number",
     "content": "string",
     "comment": "string",
-    "created": "Date" // created time
+    "created": "string" // highlight created time
   }],
 }
 ```
