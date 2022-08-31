@@ -1,0 +1,28 @@
+{
+  "name": "highlights2json",
+  "version": "1.0.0",
+  "private": true,
+  "description": "convert book highlights from different places to one json format.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "book",
+    "highlights",
+    "kindle",
+    "json",
+    "markdown"
+  ],
+  "author": "Benbinbin",
+  "license": "MIT",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "nuxt": "3.0.0-rc.8"
+  }
+}
