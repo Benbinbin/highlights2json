@@ -24,6 +24,8 @@
     "sass": "^1.54.7"
   },
   "dependencies": {
-    "file-saver": "^2.0.5"
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
+    "mdast-util-from-markdown": "^1.2.0"
   }
 }

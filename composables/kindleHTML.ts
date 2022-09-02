@@ -3,7 +3,7 @@
  * @param {Node} dom - the html document
  * @returns {Object} - the metadata of book, include title, authors, translator(option)
  */
-export function getMetaData(dom) {
+export function getMetaDataFromKindle(dom) {
   const title = dom.querySelector('.bookTitle').textContent.trim();
   const authors = dom.querySelector('.authors')
     .textContent
@@ -41,7 +41,7 @@ export function getMetaData(dom) {
  * @returns {Array} - highlights list, include chapter(option), heading, color, location, highlight content, comment(option)
  */
 // Reference: https://github.com/sawyerh/kindle-email-to-json/blob/207d7f54826a0a75a16a498b4fa6e7eff4f120c2/Converter.js
-export function getHighlights(dom) {
+export function getHighlightsFromKindle(dom) {
   const chapters = dom.querySelectorAll('.sectionHeading');
   const headings = dom.querySelectorAll('.noteHeading');
   // console.log(headings);
@@ -113,6 +113,22 @@ export function getHighlights(dom) {
   // console.log(highlights);
   return highlights
 }
+
+/**
+ *
+ * combine result
+ *
+ */
+export function getParseResultFromKindle(dom) {
+  const metadata = getMetaDataFromKindle(dom)
+  const highlights = getHighlightsFromKindle(dom)
+
+  return {
+    metadata,
+    highlights
+  }
+}
+
 
 /**
  *
