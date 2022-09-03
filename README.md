@@ -1,3 +1,5 @@
+[![Highlights2JSON](./images/highlights2json.svg)](https://github.com/Benbinbin/highlights2json)
+
 # Highlights2JSON
 
 This project aims to convert book highlights from various sources to the same JSON format for more easily reuse by developers.
