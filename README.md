@@ -79,3 +79,5 @@ If you have any problem or suggestion about this project, feel free to open an [
 
 ## Donate
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H6ESSW2)
+
+[![ko-fi](./images/afdian.png)](https://afdian.net/a/benbinbin)
