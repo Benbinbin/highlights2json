@@ -78,6 +78,6 @@ The output JSON file will contains some properties as follow:
 If you have any problem or suggestion about this project, feel free to open an [issue](https://github.com/Benbinbin/highlights2json/issues/new) in Github or contact with me by email <a href="mailto:benthomsonbin@gmail.com">benthomsonbin@gmail.com</a>
 
 ## Donate
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H6ESSW2)
+[![ko-fi](./images/kofi.svg)](https://ko-fi.com/benbinbin)
 
-[![ko-fi](./images/afdian.png)](https://afdian.net/a/benbinbin)
+[![ko-fi](./images/afdian.svg)](https://afdian.net/a/benbinbin)
