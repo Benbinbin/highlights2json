@@ -348,7 +348,8 @@ const clearAll = () => {
           class="link">MIT</a></p>
       <p>Source Code <a href="https://github.com/Benbinbin/highlights2json" class="link" target="_blank">Github</a>
       </p>
-      <p>Donate at <a href="https://ko-fi.com/H2H6ESSW2" class="link" target="_blank">Ko-fi</a>
+      <p>Donate at <a href="https://ko-fi.com/H2H6ESSW2" class="link" target="_blank">Ko-fi</a> or <a
+          href="https://afdian.net/a/benbinbin" class="link" target="_blank">爱发电</a>
       </p>
     </div>
   </div>
