@@ -1,22 +1,29 @@
 # Highlights2JSON
 
-Homepage :point_right: https://highlights2json.benbinbin.com
-
 This project aims to convert book highlights from various sources to the same JSON format for more easily reuse by developers.
 
 :sparkles: All your data just retain on your browser (it will not be send to backend server, because this tool just run based on the frontend), so feel free to use it.
 
-## Input
+## How to use
 
-Visit the [website](https://highlights2json.benbinbin.com) and drag and drop the file(s) to the input region, just a second, you will get the output JSON file(s)
+Visit any one of the websites listed below :point_down: to use this tools:
+
+:link: https://highlights2json.benbinbin.com
+
+:link: https://highlights2json.vercel.app/
+
+
+### Input
+
+Visit the website shown above :point_up: and drag and drop the file(s) to the input region, just a second, you will get the output JSON file(s)
 
 :loudspeaker: the supported formats and files
 
-* HTML file export from [Kindle app](https://www.amazon.com/kindle-dbs/fd/kcp).
+* HTML file export from [Kindle app](https://www.amazon.com/kindle-dbs/fd/kcp)
 
 * Markdown file export from [纸间书摘（原书伴app）](https://www.xmnote.com/)
 
-## Output
+### Output
 
 The output JSON file will contains some properties as follow:
 
@@ -61,3 +68,14 @@ The output JSON file will contains some properties as follow:
   }],
 }
 ```
+
+## License
+
+[MIT](./LICENSE)
+
+## Feedback
+
+If you have any problem or suggestion about this project, feel free to open an [issue](https://github.com/Benbinbin/highlights2json/issues/new) in Github or contact with me by email <a href="mailto:benthomsonbin@gmail.com">benthomsonbin@gmail.com</a>
+
+## Donate
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H6ESSW2)

@@ -70,7 +70,6 @@ const parse = () => {
         // const metadata = getMetaDataFromKindle(dom);
         // const highlights = getHighlightsFromKindle(dom);
         const { metadata, highlights } = getParseResultFromKindle(dom)
-
         result.value.push({
           name: item.name,
           metadata: metadata,
@@ -80,7 +79,12 @@ const parse = () => {
         console.log(`cannot get highlights from ${item.name}.`)
       }
     } else if(currentInputSource.value === 'xmnote') {
-      getParseResultFromXmnote(item.data)
+      const { metadata, highlights } = getParseResultFromXmnote(item.data)
+      result.value.push({
+        name: item.name,
+        metadata: metadata,
+        highlights: highlights,
+      })
     }
 
   });
@@ -212,7 +216,7 @@ const clearAll = () => {
       <h2 class="text-center text-xl sm:text-2xl font-bold text-gray-600">Input</h2>
       <hr class="w-1/5 mx-auto my-4 bg-gray-100">
       <div class="sources-list-container my-8 flex items-center overflow-x-auto">
-        <div class="grow flex sm:flex-wrap justify-center items-center gap-4 ">
+        <div class="grow flex sm:flex-wrap justify-center items-center gap-4 focus:outline-none">
           <button v-for="(item, key) in inputSources" :key="key" class="source-btn"
             :class="currentInputSource === key ? 'text-white bg-blue-500 hover:bg-blue-400' : 'text-blue-500 hover:bg-blue-50'"
             @click="currentInputSource = key">{{ item.name }}</button>
@@ -340,7 +344,12 @@ const clearAll = () => {
     <hr class="w-1/4 mx-auto my-8 bg-gray-50">
     <div class="flex flex-wrap justify-center items-center gap-4 text-gray-300 text-xs">
       <p>Created by <a href="https://benbinbin.com" target="_blank" class="link">Benbinbin</a></p>
-      <p>LICENSE <a href="./LICENSE" class="link">MIT</a></p>
+      <p>LICENSE <a href="https://github.com/Benbinbin/highlights2json/blob/main/LICENSE" target="_blank"
+          class="link">MIT</a></p>
+      <p>Source Code <a href="https://github.com/Benbinbin/highlights2json" class="link" target="_blank">Github</a>
+      </p>
+      <p>Donate at <a href="https://ko-fi.com/H2H6ESSW2" class="link" target="_blank">Ko-fi</a>
+      </p>
     </div>
   </div>
 </template>
