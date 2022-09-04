@@ -112,17 +112,6 @@ export function getHighlightsFromKindle(dom) {
         }
       }
 
-      // if (chapterDomArr.length) {
-      //   let tempNode = heading;
-      //   while (tempNode.nodeName !== 'HR') {
-      //     if (tempNode.classList.contains('sectionHeading')) {
-      //       chapter = tempNode.textContent.trim();
-      //       break
-      //     }
-      //     tempNode = tempNode.previousElementSibling
-      //   }
-      // }
-
       // color
       let color = null;
       const spanNode = node.querySelector("span[class^='highlight_']")

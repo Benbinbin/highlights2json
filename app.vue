@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { saveAs } from 'file-saver';
-import * as JSZip from 'jszip';
+import JSZip from '@progress/jszip-esm';
+
 import { getParseResultFromKindle } from './composables/kindleHTML'
 import { getParseResultFromXmnote } from './composables/xmnoteMarkdown'
 
