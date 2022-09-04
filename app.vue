@@ -211,9 +211,9 @@ const clearAll = () => {
   <div class="container mx-auto my-8 p-4">
     <Title>Highlights2JSON</Title>
     <h1 class="text-center text-2xl sm:text-5xl font-bold">
-      <a href="https://github.com/Benbinbin/highlights2json" target="_blank">
+      <a href="https://github.com/Benbinbin/highlights2json" target="_blank" class="flex justify-center items-center gap-2">
         <span class="text-yellow-400">Highlights</span>
-        <span>🔀</span>
+        <img src="./public/images/logo.svg" class="w-8 sm:w-12 h-8 sm:h-12" alt="logo" />
         <span class="text-green-500">JSON</span>
       </a>
     </h1>
