@@ -8,7 +8,7 @@ This project aims to convert book highlights from various sources to the same JS
 
 ## How to use
 
-Visit any one of the websites listed below :point_down: to use this tools:
+Visit one of the websites listed below :point_down: to use this tool:
 
 :link: https://highlights2json.benbinbin.com
 
@@ -19,12 +19,13 @@ Visit any one of the websites listed below :point_down: to use this tools:
 
 Visit the website shown above :point_up: and drag and drop the file(s) to the input region, just a second, you will get the output JSON file(s)
 
-:loudspeaker: the supported formats and files
+now the supported formats and files list below:
 
 * HTML file export from [Kindle app](https://www.amazon.com/kindle-dbs/fd/kcp)
 
 * Markdown file export from [纸间书摘（原书伴app）](https://www.xmnote.com/)
 
+:loudspeaker: if you have some suggestion feel free to open an [issue](https://github.com/Benbinbin/highlights2json/issues/new) in Github or contact with me by email <a href="mailto:benthomsonbin@gmail.com">benthomsonbin@gmail.com</a>
 ### Output
 
 The output JSON file will contains some properties as follow:
@@ -56,6 +57,11 @@ The output JSON file will contains some properties as follow:
     "tags": "[string]",
     "stars": "number",
     "links": "[string]", // a urls list about the book
+     // the category data structure is a tree
+     // each node contain three property:
+     // * value: the (string) value of this node
+     // * depth: the (number) level of this node
+     // * children: the sub nodes array
     "category": "object",
   },
   "highlights": [{

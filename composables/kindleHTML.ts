@@ -1,9 +1,26 @@
 /**
  *
- * @param {Node} dom - the html document
- * @returns {Object} - the metadata of book, include title, authors, translator(option)
+ * combine result
+ *
  */
-export function getMetaDataFromKindle(dom) {
+export function getParseResultFromKindle(dom) {
+  const metadata = getHeaderMetadataFromKindle(dom)
+  const { category, highlights } = getHighlightsFromKindle(dom)
+
+  metadata['category'] = category
+
+  return {
+    metadata,
+    highlights
+  }
+}
+
+/**
+ *
+ * get some metadata of book
+ *
+ */
+export function getHeaderMetadataFromKindle(dom) {
   const title = dom.querySelector('.bookTitle').textContent.trim();
   const authors = dom.querySelector('.authors')
     .textContent
@@ -37,104 +54,128 @@ export function getMetaDataFromKindle(dom) {
 
 /**
  *
- * @param {Node} dom - the html document
- * @returns {Array} - highlights list, include chapter(option), heading, color, location, highlight content, comment(option)
+ * get highlights array and category object
+ *
  */
 // Reference: https://github.com/sawyerh/kindle-email-to-json/blob/207d7f54826a0a75a16a498b4fa6e7eff4f120c2/Converter.js
 export function getHighlightsFromKindle(dom) {
-  const chapters = dom.querySelectorAll('.sectionHeading');
-  const headings = dom.querySelectorAll('.noteHeading');
-  // console.log(headings);
+  // const sectionDomArr = dom.querySelectorAll('.sectionHeading');
+  // const headingDomArr = dom.querySelectorAll('.noteHeading');
+
+  const sectionAndHeadingDomArr = dom.querySelectorAll('.sectionHeading, .noteHeading') // get the section and heading DOMs
+
+  const category = { value: 'root', depth: 0, children: [] }
+
+  let currentSection = null;
+  let currentHeading = null;
+
+  let currentChapterStr = '';
+
   let highlights = [];
 
-  headings.forEach((heading, index) => {
-    // chapter
-    let chapter = null
-    // 匹配 noteHeading 中是否含有章节信息
-    const text = heading.textContent;
-    const regexp = /-\s\S+\s>/;
-    if (regexp.test(text)) {
-      chapter = text.match(/-\s(\S+)\s>/)[1].trim();
-    } else if (chapters.length) {
-      let tempNode = heading;
-      while (tempNode.nodeName !== 'HR') {
-        if (tempNode.classList.contains('sectionHeading')) {
-          chapter = tempNode.textContent.trim();
-          break
-        }
-        tempNode = tempNode.previousElementSibling
+  sectionAndHeadingDomArr.forEach((node, index) => {
+    const text = node.textContent.trim()
+
+    if (node.classList.contains('sectionHeading')) {
+      // get the section content
+      currentChapterStr = text
+
+      currentSection = {
+        value: currentChapterStr,
+        depth: 1,
+        children: []
       }
-      // console.log(chapter);
+
+      category.children.push(currentSection)
+    } else if (node.classList.contains('noteHeading')) {
+      // get the heading content from .noteHeading element
+      const HeadingRegexp = /-\s(.+)\s>/
+
+      if (HeadingRegexp.test(text)) {
+        const tempHeadingStr = text.match(HeadingRegexp)[1].trim()
+
+        if (!currentHeading || currentHeading.value !== tempHeadingStr) {
+          currentChapterStr = tempHeadingStr
+
+          currentHeading = {
+            value: currentChapterStr,
+            depth: 2,
+            children: []
+          }
+
+          // push the heading to category or currentSection object
+          if (currentSection) {
+            currentSection.children.push(currentHeading)
+          } else {
+            category.children.push(currentHeading)
+          }
+        }
+      }
+
+      // if (chapterDomArr.length) {
+      //   let tempNode = heading;
+      //   while (tempNode.nodeName !== 'HR') {
+      //     if (tempNode.classList.contains('sectionHeading')) {
+      //       chapter = tempNode.textContent.trim();
+      //       break
+      //     }
+      //     tempNode = tempNode.previousElementSibling
+      //   }
+      // }
+
+      // color
+      let color = null;
+      const spanNode = node.querySelector("span[class^='highlight_']")
+      if (spanNode) {
+        color = spanNode.textContent.trim();
+      }
+
+      // location
+      let location = 0;
+      const locationMatchResult = text.match(/\s(\d*)$/i)
+      // match for Chinese version, which location information may be in the patten of "第 x 页"
+      const locationMatchResultResultCN = text.match(/第\s(\d*)\s页$/i)
+
+      if (locationMatchResult) {
+        location = locationMatchResult[1].trim()
+      } else if (locationMatchResultResultCN) {
+        location = locationMatchResultResultCN[1].trim()
+      }
+
+      // content
+      // based on color to tell if the content is Highlight or Comment
+      // the latter's relative .noteHeading node doesn't have the color span sub element
+      // Comment should attach to the (previous) Highlight
+      if (!color && highlights.length > 0) {
+        // attach the Comment to the previous Highlight
+        const currentHighlight = highlights[highlights.length - 1]
+        currentHighlight.comment = getContent(node)
+      } else {
+        const content = getContent(node)
+        highlights.push({
+          chapter: currentChapterStr,
+          color,
+          location,
+          content
+        });
+      }
     }
 
-
-    // color
-    let color = null;
-    const spanNode = heading.querySelector("span[class^='highlight_']")
-    if (spanNode) {
-      color = spanNode.textContent.trim();
-    }
-    // console.log(color);
-
-    // location
-    let location = 0;
-    const result = heading.textContent.trim().match(/\s(\d*)$/i);
-    // 如果 kindle 软件的语言选择中文，则导出的文件可能存在「第 x 页」的模式
-    const resultCN = heading.textContent.trim().match(/第\s(\d*)\s页$/i);
-
-    if (result) {
-      // console.log(result);
-      location = result[1].trim()
-    } else if (resultCN) {
-      // console.log(resultCN);
-      location = resultCN[1].trim()
-    }
-
-    // console.log(location);
-
-    // content
-    // 需要区分与 noteHeading 匹配的 noteText 是高亮标注 Highlight 还是评论笔记 note，后者没有 color 子节点。而且这里假设所有的评论笔记 note 都是在关联到高亮标注上（即前一个元素）
-    if (!color && highlights.length) {
-      // 处理评论笔记，将它合并到前一个节点（高亮标注）中
-      const note = highlights[highlights.length - 1];
-      note.comment = getContent(heading);
-      // console.log(comment);
-    } else {
-      const content = getContent(heading);
-      // console.log(content);
-      highlights.push({
-        chapter,
-        color,
-        location,
-        content
-      });
-    }
   })
-  // console.log(highlights);
-  return highlights
-}
-
-/**
- *
- * combine result
- *
- */
-export function getParseResultFromKindle(dom) {
-  const metadata = getMetaDataFromKindle(dom)
-  const highlights = getHighlightsFromKindle(dom)
-
   return {
-    metadata,
+    category,
     highlights
   }
 }
 
-
 /**
  *
- * @param {Node} heading - noteHeading element
+ * get .noteHeading element relative .noteText content
+ *
  */
 function getContent(heading) {
+  // each .noteHeading element next node may be the .noteText
+  // this is the highlight
   const nextNode = heading.nextElementSibling;
   if (nextNode.classList.contains('noteText')) {
     return nextNode.textContent.trim();

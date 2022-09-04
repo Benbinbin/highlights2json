@@ -6,6 +6,18 @@ import { getParseResultFromXmnote } from './composables/xmnoteMarkdown'
 
 /**
  *
+ * setting favicon
+ */
+useHead({
+  link: [{
+    rel: 'icon',
+    type: 'image/png',
+    href: './images/favicon.ico'
+  }]
+})
+
+/**
+ *
  * input file
  *
  */
@@ -66,9 +78,6 @@ const parse = () => {
       // validate: whether the given HTML is a valid Kindle highlights export
       const highlightsNode = dom.querySelectorAll(".noteText");
       if (highlightsNode.length) {
-
-        // const metadata = getMetaDataFromKindle(dom);
-        // const highlights = getHighlightsFromKindle(dom);
         const { metadata, highlights } = getParseResultFromKindle(dom)
         result.value.push({
           name: item.name,
@@ -338,6 +347,10 @@ const clearAll = () => {
             class="font-mono px-2 py-1 text-sm text-gray-600 bg-gray-100 border rounded"> JSON</span> format. ⚠️ And
           keep in mind that some properties in the JSON format may be missing based on different input file or format.
         </p>
+
+        <p class="px-4 py-2 text-purple-500 bg-purple-100 rounded">📢 If you have some suggestions or problems feel free to open an
+          <a href="https://github.com/Benbinbin/highlights2json/issues/new" target="_blank" class="link">Issue</a> in Github or contact with me by email <a
+            href="mailto:benthomsonbin@gmail.com" class="link">benthomsonbin@gmail.com</a></p>
       </div>
     </div>
 

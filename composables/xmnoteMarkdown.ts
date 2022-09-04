@@ -3,16 +3,16 @@ import { fromMarkdown } from 'mdast-util-from-markdown'
 
 export function getParseResultFromXmnote(data) {
   const tree = fromMarkdown(data)
-  console.log(tree);
+
   const metadata = {}
   let highlights = []
 
   if(tree.children[0].type === 'html') {
-    const headerMetadata = getHeaderMetaDataFromXmnote(tree.children[0].value)
+    const headerMetadata = getHeaderMetadataFromXmnote(tree.children[0].value)
     Object.assign(metadata, headerMetadata);
   }
 
-  if(tree.children.length>0) {
+  if(tree.children.length > 0) {
     const { category, highlights: highlightsFromXmnote } = getHighlightFromXmnote(tree.children)
 
     metadata['category'] = category
@@ -25,7 +25,7 @@ export function getParseResultFromXmnote(data) {
   }
 }
 
-function getHeaderMetaDataFromXmnote(str) {
+function getHeaderMetadataFromXmnote(str) {
   const headerMetadata = {}
 
   // cover
