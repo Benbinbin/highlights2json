@@ -206,7 +206,7 @@ function getHighlightFromXmnote(arr) {
       newHighlight = true
     } else if (item.type === 'paragraph') {
       if(newHighlight) {
-        const content = item.children.map(node => node.value).join().replaceAll('<br>', '\n')
+        const content = item.children.map(node => node.value).join('').replaceAll('<br>', '\n')
         currentHighlight = {
           chapter: currentHeadingStr,
           content: content
@@ -232,7 +232,7 @@ function getHighlightFromXmnote(arr) {
     } else if (item.type === 'blockquote') {
       const comment = item.children.map(node => {
         return node.children.map(subNode => subNode.value).join('\n')
-      }).join('\n')
+      }).join('').replaceAll('<br>', '\n')
 
       currentHighlight['comment'] = comment
     }
