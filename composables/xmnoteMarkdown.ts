@@ -4,6 +4,8 @@ import { fromMarkdown } from 'mdast-util-from-markdown'
 export function getParseResultFromXmnote(data) {
   const tree = fromMarkdown(data)
 
+  console.log(tree);
+
   const metadata = {}
   let highlights = []
 
@@ -231,8 +233,8 @@ function getHighlightFromXmnote(arr) {
       }
     } else if (item.type === 'blockquote') {
       const comment = item.children.map(node => {
-        return node.children.map(subNode => subNode.value).join('\n')
-      }).join('').replaceAll('<br>', '\n')
+        return node.children.map(subNode => subNode.value).join('')
+      }).join('\n').replaceAll('<br>', '\n')
 
       currentHighlight['comment'] = comment
     }
