@@ -4,7 +4,7 @@ import { fromMarkdown } from 'mdast-util-from-markdown'
 export function getParseResultFromXmnote(data) {
   const tree = fromMarkdown(data)
 
-  console.log(tree);
+  // console.log(tree);
 
   const metadata = {}
   let highlights = []
