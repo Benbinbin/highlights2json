@@ -79,20 +79,22 @@ const parse = () => {
       // validate: whether the given HTML is a valid Kindle highlights export
       const highlightsNode = dom.querySelectorAll(".noteText");
       if (highlightsNode.length) {
-        const { metadata, highlights } = getParseResultFromKindle(dom)
+        const { metadata, category, highlights } = getParseResultFromKindle(dom)
         result.value.push({
           name: item.name,
           metadata: metadata,
+          category: category,
           highlights: highlights,
         })
       } else {
         console.log(`cannot get highlights from ${item.name}.`)
       }
     } else if(currentInputSource.value === 'xmnote') {
-      const { metadata, highlights } = getParseResultFromXmnote(item.data)
+      const { metadata, category, highlights } = getParseResultFromXmnote(item.data)
       result.value.push({
         name: item.name,
         metadata: metadata,
+        category: category,
         highlights: highlights,
       })
     }

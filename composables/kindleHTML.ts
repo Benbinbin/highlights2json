@@ -7,10 +7,9 @@ export function getParseResultFromKindle(dom) {
   const metadata = getHeaderMetadataFromKindle(dom)
   const { category, highlights } = getHighlightsFromKindle(dom)
 
-  metadata['category'] = category
-
   return {
     metadata,
+    category,
     highlights
   }
 }

@@ -52,18 +52,18 @@ The output JSON file will contains some properties as follow:
     "press": "string",
     "covers": "[string]", // a urls list of the book cover images
     "types": "[string]",
-    "description": "string",
-    "review": "string",
     "tags": "[string]",
     "stars": "number",
     "links": "[string]", // a urls list about the book
-     // the category data structure is a tree
-     // each node contain three property:
-     // * value: the (string) value of this node
-     // * depth: the (number) level of this node
-     // * children: the sub nodes array
-    "category": "object",
   },
+  "introduction": "string", // the introduction of the book
+  "review": "string", // your review of the book,
+  // the category data structure is a tree
+  // each node contain three property:
+  // * value: the (string) value of this node
+  // * depth: the (number) level of this node
+  // * children: the sub nodes array
+  "category": "object",
   "highlights": [{
     "chapter": "string",
     "color": "string",
